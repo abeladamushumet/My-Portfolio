@@ -3,27 +3,25 @@ import { CheckCircle } from "lucide-react";
 export default function ExperienceSection() {
   const experiences = [
     {
-      position: "Data Science Intern",
-      company: "Information Network Security Agency (INSA)",
-      location: "Addis Ababa, Ethiopia",
-      period: "Jun 2025 - Present",
+      position: "Machine Learning Intern",
+      company: "Future Interns",
+      location: "Remote",
+      period: "Oct 2025 – Nov 2025",
       color: "primary",
       achievements: [
-        "Developed computer vision solutions for object detection in security imagery",
-        "Built Amharic speech-to-text NLP models for audio transcription",
-        "Conducted EDA and model optimization for improved accuracy"
+        "Built sales forecasting and customer churn prediction models using Python, XGBoost, Prophet, and Power BI",
+        "Developed a smart NLP chatbot for customer support with Rasa and GPT models, deployed via Streamlit"
       ]
     },
     {
-      position: "Data Science Trainee",
-      company: "10 Academy",
-      location: "Remote",
-      period: "May 2025 - Present",
+      position: "Data Science Intern",
+      company: "Information Network Security Agency (INSA)",
+      location: "Addis Ababa, Ethiopia",
+      period: "Jun 2025 – Sep 2025",
       color: "secondary",
       achievements: [
-        "Built portfolio forecasting systems using ARIMA and LSTM models",
-        "Designed NER models for Amharic e-commerce data",
-        "Deployed solutions with FastAPI & Docker"
+        "Developed computer vision models for object detection in security imagery",
+        "Built Amharic speech-to-text NLP systems for audio transcription and analysis"
       ]
     }
   ];

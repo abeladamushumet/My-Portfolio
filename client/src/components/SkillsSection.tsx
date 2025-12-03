@@ -9,63 +9,60 @@ export default function SkillsSection() {
       bgColor: "bg-primary-600",
       skills: [
         "Python (Pandas, NumPy, Scikit-learn)",
-        "TensorFlow, PyTorch",
-        "SQL, R"
-      ]
-    },
-    {
-      icon: BarChart3,
-      title: "EDA & Visualization",
-      color: "text-secondary-600",
-      bgColor: "bg-secondary-600",
-      skills: [
-        "Matplotlib, Seaborn",
-        "Plotly",
-        "Data Analysis"
+        "R"
       ]
     },
     {
       icon: Brain,
+      title: "Machine Learning & AI Frameworks",
+      color: "text-red-600",
+      bgColor: "bg-red-600",
+      skills: [
+        "TensorFlow, PyTorch",
+        "Machine Learning: Regression, Classification, Clustering",
+        "Deep Learning: CNN, RNN, LSTM",
+        "RAG Systems"
+      ]
+    },
+    {
+      icon: BarChart3,
+      title: "Data Analysis & Visualization",
+      color: "text-secondary-600",
+      bgColor: "bg-secondary-600",
+      skills: [
+        "Exploratory Data Analysis (EDA)",
+        "Matplotlib, Seaborn, Plotly",
+        "Data preprocessing and feature engineering"
+      ]
+    },
+    {
+      icon: Bot,
       title: "Specializations",
       color: "text-emerald-600",
       bgColor: "bg-emerald-600",
       skills: [
-        "Natural Language Processing",
+        "Natural Language Processing (NLP)",
         "Time Series Forecasting",
         "Computer Vision"
       ]
     },
     {
       icon: GitBranch,
-      title: "Version Control",
+      title: "Version Control & Collaboration",
       color: "text-purple-600",
       bgColor: "bg-purple-600",
       skills: [
-        "Git",
-        "GitHub",
-        "DVC"
+        "Git, GitHub, DVC"
       ]
     },
     {
       icon: Server,
-      title: "Deployment",
+      title: "Deployment & MLOps",
       color: "text-orange-600",
       bgColor: "bg-orange-600",
       skills: [
         "FastAPI",
-        "Docker",
         "Streamlit"
-      ]
-    },
-    {
-      icon: Bot,
-      title: "AI & ML",
-      color: "text-red-600",
-      bgColor: "bg-red-600",
-      skills: [
-        "Machine Learning",
-        "Deep Learning",
-        "RAG Systems"
       ]
     }
   ];
@@ -79,7 +76,7 @@ export default function SkillsSection() {
           </h2>
           <div className="w-24 h-1 bg-primary-600 mx-auto mb-6"></div>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto" data-testid="skills-description">
-            Comprehensive toolkit for data science, machine learning, and AI development
+            Comprehensive toolkit for data analysis, machine learning, and AI development
           </p>
         </div>
         

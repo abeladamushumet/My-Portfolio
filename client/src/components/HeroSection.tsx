@@ -52,12 +52,11 @@ export default function HeroSection() {
               Junior Data Scientist & AI Enthusiast
             </h2>
             <p
-              className="text-lg text-slate-600 mb-8 max-w-2xl"
+              className="text-lg text-slate-600 mb-8 max-w-2xl text-center mx-auto"
               data-testid="hero-description"
             >
-              Passionate about transforming data into actionable insights.
-              Specialized in machine learning, NLP, and AI-driven solutions with
-              hands-on experience in finance, security, and energy sectors.
+              I transform data into actionable insights using machine learning, NLP, and AI-driven solutions, with hands-on
+              experience in finance, security, and energy.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">

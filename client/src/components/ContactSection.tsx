@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import emailjs from "@emailjs/browser";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -14,6 +15,9 @@ export default function ContactSection() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const emailServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const emailTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const emailPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -24,26 +28,38 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!emailServiceId || !emailTemplateId || !emailPublicKey) {
+      toast({
+        title: "Email service is not configured",
+        description: "Please try again later or reach out via email.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      await emailjs.send(
+        emailServiceId,
+        emailTemplateId,
+        {
+          from_name: formData.name,
+          reply_to: formData.email,
+          subject: formData.subject,
+          message: formData.message,
         },
-        body: JSON.stringify(formData),
-      });
+        {
+          publicKey: emailPublicKey,
+        }
+      );
 
-      if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you soon.",
-        });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        throw new Error('Failed to send message');
-      }
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+      setFormData({ name: '', email: '', subject: '', message: '' });
     } catch (error) {
       toast({
         title: "Error sending message",
@@ -57,7 +73,7 @@ export default function ContactSection() {
 
   const downloadCV = async () => {
     try {
-      const response = await fetch('/api/download-cv');
+      const response = await fetch('/abela.pdf');
       if (response.ok) {
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
@@ -73,6 +89,8 @@ export default function ContactSection() {
           title: "CV downloaded successfully!",
           description: "Thank you for your interest in my profile.",
         });
+      } else {
+        throw new Error('Failed to download CV');
       }
     } catch (error) {
       toast({

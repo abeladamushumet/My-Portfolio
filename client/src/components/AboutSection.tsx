@@ -12,31 +12,31 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <img 
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600" 
-              alt="Modern tech office environment with laptops and data displays" 
-              className="rounded-xl shadow-lg w-full h-auto"
+              src="/abel.jpg"
+              alt="Portrait of Abel Adamu Shumet"
+              className="rounded-xl shadow-lg w-full h-auto object-cover"
               data-testid="about-image"
             />
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-6 text-center lg:text-left">
             <p className="text-lg text-slate-600 leading-relaxed" data-testid="about-description-1">
-              I am a passionate and detail-oriented Junior Data Scientist specializing in machine learning, 
-              data analysis, and AI-driven solutions. My expertise lies in developing predictive models, 
-              performing in-depth data analysis, and delivering actionable insights.
+              I am a passionate and detail-oriented Junior Data Scientist specializing in data analysis,
+              machine learning, NLP, and AI-driven solutions. I build predictive models, analyze complex datasets,
+              and deliver actionable insights that solve real-world problems.
             </p>
-            
+
             <p className="text-lg text-slate-600 leading-relaxed" data-testid="about-description-2">
-              I have worked on multiple real-world projects through 10 Academy and industry internships, 
-              gaining hands-on experience in finance, security, energy, and NLP applications.
+              Through 10 Academy projects and industry internships, I have completed 10+ end-to-end projects with
+              hands-on experience in finance, security, energy, and NLP applications.
             </p>
-            
-            <div className="grid grid-cols-2 gap-6 pt-6">
-              <div className="text-center p-6 bg-slate-50 rounded-lg" data-testid="stat-projects">
-                <h3 className="text-2xl font-bold text-primary-600 mb-2">6+</h3>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-6 text-center">
+              <div className="p-6 bg-slate-50 rounded-lg" data-testid="stat-projects">
+                <h3 className="text-2xl font-bold text-primary-600 mb-2">10+</h3>
                 <p className="text-slate-600">Projects Completed</p>
               </div>
-              <div className="text-center p-6 bg-slate-50 rounded-lg" data-testid="stat-experience">
+              <div className="p-6 bg-slate-50 rounded-lg" data-testid="stat-experience">
                 <h3 className="text-2xl font-bold text-primary-600 mb-2">2+</h3>
                 <p className="text-slate-600">Years Experience</p>
               </div>
