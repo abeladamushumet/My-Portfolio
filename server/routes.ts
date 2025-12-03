@@ -1,6 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { z } from "zod";
+import nodemailer from "nodemailer";
 import PDFDocument from 'pdfkit';
 
 const contactSchema = z.object({
@@ -10,15 +11,50 @@ const contactSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
+const smtpHost = process.env.SMTP_HOST;
+const smtpPort = process.env.SMTP_PORT ? parseInt(process.env.SMTP_PORT, 10) : 587;
+const smtpSecure = process.env.SMTP_SECURE === "true";
+const smtpUser = process.env.SMTP_USER;
+const smtpPass = process.env.SMTP_PASS;
+const smtpRecipient = process.env.CONTACT_RECIPIENT || smtpUser;
+
+const transporter = smtpHost && smtpUser && smtpPass
+  ? nodemailer.createTransport({
+      host: smtpHost,
+      port: smtpPort,
+      secure: smtpSecure,
+      auth: {
+        user: smtpUser,
+        pass: smtpPass,
+      },
+    })
+  : null;
+
 export async function registerRoutes(app: Express): Promise<Server> {
   // Contact form submission
   app.post("/api/contact", async (req, res) => {
     try {
       const validatedData = contactSchema.parse(req.body);
       
-      // In a real application, you would send an email here
-      // For now, we'll just log the contact form submission
-      console.log("Contact form submission:", validatedData);
+      if (!transporter || !smtpRecipient) {
+        console.warn("Contact form submission received but SMTP is not configured.");
+        throw new Error("Email service is not configured");
+      }
+
+      await transporter.sendMail({
+        from: `Portfolio Contact <${smtpUser}>`,
+        to: smtpRecipient,
+        replyTo: `${validatedData.name} <${validatedData.email}>`,
+        subject: `Portfolio Contact: ${validatedData.subject}`,
+        text: `Name: ${validatedData.name}\nEmail: ${validatedData.email}\nSubject: ${validatedData.subject}\n\n${validatedData.message}`,
+        html: `
+          <p><strong>Name:</strong> ${validatedData.name}</p>
+          <p><strong>Email:</strong> ${validatedData.email}</p>
+          <p><strong>Subject:</strong> ${validatedData.subject}</p>
+          <p><strong>Message:</strong></p>
+          <p>${validatedData.message.replace(/\n/g, '<br />')}</p>
+        `,
+      });
       
       res.json({ success: true, message: "Message sent successfully" });
     } catch (error) {
@@ -31,7 +67,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         res.status(500).json({ 
           success: false, 
-          message: "Internal server error" 
+          message: error instanceof Error ? error.message : "Internal server error" 
         });
       }
     }
